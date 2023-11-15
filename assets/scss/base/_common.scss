@@ -1,0 +1,24 @@
+.blind {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    margin: -1px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    // min-width: calc(1640px - 11vw);
+    // min-height: 100vh;
+}
+
+.inner {
+    // min-width: calc(1640px - 11vw);
+    width: 100%;
+    padding: 0 5.5vw;
+    max-width: 1640px;
+    margin: 0 auto;
+    transition: all 0.2s;
+}
