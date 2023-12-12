@@ -2,14 +2,27 @@
     .title-area {
         .desc {
             margin-bottom: 5px;
-            font-size: 18px;
+            font-size: max(14px, 1.171875vw);
             font-weight: 800;
+
+            @include tb {
+                margin-bottom: 0;
+            }
         }
 
         .headline {
             font-size: 36px;
             font-weight: 900;
             line-height: 1.2;
+
+            @include tb {
+                font-size: max(28px, 3vw);
+            }
+
+            @include m {
+                font-size: max(26px, 3vw);
+                line-height: 1.3;
+            }
         }
     }
 
@@ -17,12 +30,13 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 10;
+        z-index: 100;
         pointer-events: none;
 
         &.on {
             .pointer-box {
                 opacity: 1;
+                visibility: visible;
             }
         }
 
@@ -32,6 +46,7 @@
             align-items: center;
             transform: translate(-50%, -50%);
             opacity: 0;
+            visibility: hidden;
             width: 100px;
             height: 100px;
             font-size: 13px;
@@ -46,11 +61,33 @@
     .sc-visual {
         padding-top: 220px;
 
+        @include tb {
+            padding-top: 180px;
+        }
+
+        @include m {
+            padding-top: 130px;
+        }
+
         .inner {
             position: relative;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+        }
+
+        .title-area {
+            .headline {
+                position: absolute;
+                opacity: 0;
+                visibility: hidden;
+
+                &.on {
+                    position: relative;
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
         }
 
         .slide-move {
@@ -59,6 +96,14 @@
             height: 50px;
             margin-bottom: -20px;
             margin-right: 50px;
+
+            @include tb {
+                width: 160px;
+            }
+
+            @include m {
+                display: none;
+            }
         }
 
         .slide-box {
@@ -167,20 +212,67 @@
 
         .swiper {
             margin-top: 60px;
+
+            @include tb {
+                margin-top: 40px;
+            }
+
+            @include m {
+                margin-top: 20px;
+            }
+
+            .swiper-slide {
+                position: relative;
+
+                @include tb {
+                    width: 485px;
+                    height: 485px;
+                }
+
+                img {
+                    @include tb {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        object-position: center;
+                    }
+                }
+            }
         }
     }
 
     .sc-room {
+        position: relative;
         overflow: hidden;
         margin-top: 130px;
 
+        @include m {
+            margin-top: 80px;
+        }
+
         .inner {
             position: relative;
+
+            @include tb {
+                padding-right: 0;
+            }
         }
 
         .title-area {
             padding-bottom: 40px;
             border-bottom: 1px solid #bcbcbc;
+
+            @include tb {
+                border-bottom: 1px solid #eee;
+                padding-bottom: 30px;
+            }
+
+            @include m {
+                padding-bottom: 20px;
+            }
         }
 
         .swiper {
@@ -190,6 +282,10 @@
                 position: relative;
                 padding: 40px 0px 50px;
 
+                @include tb {
+                    padding: 25px 0 30px;
+                }
+
                 &::before {
                     content: "";
                     position: absolute;
@@ -198,17 +294,48 @@
                     width: 1px;
                     height: calc(100% + 2px);
                     background-color: #bcbcbc;
+
+                    @include tb {
+                        left: -20px;
+                        background-color: #eee;
+                    }
+
+                    @include m {
+                        left: -15px;
+                    }
                 }
             }
 
             .top-area {
                 position: relative;
+
+                @include tb {
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-top: 0;
+                }
             }
 
             .user-wrap {
                 display: flex;
                 align-items: center;
                 flex-shrink: 0;
+
+                &.pc {
+                    display: block;
+
+                    @include tb {
+                        display: none;
+                    }
+                }
+
+                &.mobile {
+                    display: none;
+
+                    @include tb {
+                        display: flex;
+                    }
+                }
 
                 img {
                     flex-shrink: 0;
@@ -217,12 +344,26 @@
                     width: 35px;
                     height: 35px;
                     border-radius: 50%;
+
+                    @include tb {
+                        width: 25px;
+                        height: 25px;
+                    }
                 }
 
                 span {
                     margin-left: 10px;
                     font-size: 14px;
                     font-weight: 500;
+
+                    @include tb {
+                        margin-left: 7px;
+                        font-size: 11px;
+                    }
+
+                    @include m {
+                        margin-left: 4px;
+                    }
                 }
             }
 
@@ -246,6 +387,23 @@
                 text-underline-offset: 2px;
                 line-height: 1.6;
                 min-height: 105px;
+
+                @include pc {
+                    min-height: 105px;
+                }
+
+                @include tb {
+                    width: 100%;
+                    min-height: 3.2em;
+                    margin-bottom: 15px;
+                    -webkit-line-clamp: 2;
+                    font-size: 16px;
+                    margin-top: 0;
+                }
+
+                @include m {
+                    text-decoration: none;
+                }
             }
 
             .txt-box {
@@ -253,6 +411,19 @@
                 bottom: 0;
                 right: 0;
                 transform: translateY(50%);
+
+                @include pc-md {
+                    bottom: -10px;
+                    transform: translateY(100%);
+                }
+
+                @include tb {
+                    position: relative;
+                    bottom: auto;
+                    right: auto;
+                    transform: none;
+                    margin-left: auto;
+                }
 
                 &:hover {
                     span {
@@ -275,11 +446,20 @@
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
+
+                    @include m {
+                        display: none;
+                    }
                 }
 
                 img {
                     width: 40px;
                     height: 40px;
+
+                    @include tb {
+                        width: 30px;
+                        height: 30px;
+                    }
                 }
             }
 
@@ -288,6 +468,14 @@
                 overflow: hidden;
                 position: relative;
                 margin-top: 35px;
+
+                @include pc-md {
+                    margin-top: 70px;
+                }
+
+                @include tb {
+                    margin-top: 10px;
+                }
 
                 &:hover .bg-txt {
                     transform: translateY(0);
@@ -325,6 +513,10 @@
                     text-align: center;
                     transform: translateY(100%);
                     transition: all .3s;
+
+                    @include tb {
+                        transform: translateY(0);
+                    }
                 }
 
                 .ico-text {
@@ -368,6 +560,10 @@
             z-index: 2;
             width: 154px;
             animation: rotateTriangle 10s linear infinite;
+
+            @include tb {
+                display: none;
+            }
         }
 
         .link-wrap {
@@ -376,6 +572,17 @@
             border-bottom: 1px solid #bcbcbc;
             font-size: 30px;
             font-weight: 700;
+
+            @include tb {
+                padding: 20px 0;
+                font-size: 20px;
+                border-top: 1px solid #eee;
+                border-bottom: 1px solid #eee;
+            }
+
+            @include m {
+                font-size: 16px;
+            }
 
             &:hover {
                 svg {
@@ -400,6 +607,14 @@
                 margin-left: 20px;
                 transition: all .3s;
 
+                @include tb {
+                    width: 30px;
+                }
+
+                @include m {
+                    width: 25px;
+                }
+
                 .cls-1 {
                     stroke: #000;
                     stroke-miterlimit: 10;
@@ -414,11 +629,24 @@
     }
 
     .sc-item {
+        position: relative;
         margin-top: 150px;
+
+        @include m {
+            margin-top: 80px;
+        }
 
         .swiper {
             margin-top: 80px;
             cursor: none;
+
+            @include tb {
+                margin-top: 40px;
+            }
+
+            @include m {
+                margin-top: 20px;
+            }
 
             .link-wrap {
                 display: flex;
@@ -432,6 +660,15 @@
                     font-size: 14px;
                     color: #999;
                     transition: all .3s;
+
+                    @include tb {
+                        font-size: 12px;
+                    }
+
+                    @include m {
+                        font-size: 11px;
+                        font-weight: 600;
+                    }
                 }
 
                 strong {
@@ -463,6 +700,11 @@
                 margin-bottom: 15px;
                 color: #999;
 
+                @include m {
+                    margin-top: 15px;
+                    margin-bottom: 6px;
+                }
+
                 span {
                     display: inline-flex;
                     align-items: center;
@@ -470,6 +712,14 @@
                     font-weight: 600;
                     line-height: 1;
                     transition: all .3s;
+
+                    @include tb {
+                        font-size: 12px;
+                    }
+
+                    @include m {
+                        font-size: 10px;
+                    }
 
                     &:last-child::before {
                         content: "";
@@ -498,6 +748,11 @@
                 text-underline-position: under;
                 text-underline-offset: 2px;
                 line-height: 1.6;
+
+                @include m {
+                    font-size: 13px;
+                    text-decoration: none;
+                }
             }
 
             .desc {
@@ -510,16 +765,42 @@
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 1;
                 font-size: 15px;
+
+                @include tb {
+                    margin-top: 10px;
+                    font-size: 13px;
+                }
+
+                @include m {
+                    -webkit-line-clamp: 1;
+                    height: 1.5em;
+                    margin-top: 4px;
+                    font-size: 12px;
+                }
             }
 
             .price {
                 display: flex;
                 align-items: center;
-                margin-top: 25px;
+                margin-top: 20px;
                 color: #000;
                 font-size: 26px;
                 font-weight: 700;
                 line-height: 1;
+
+                @include pc {
+                    margin-top: 25px;
+                }
+
+                @include tb {
+                    margin-top: 15px;
+                    font-size: 20px;
+                }
+
+                @include m {
+                    margin-top: 15px;
+                    font-size: 14px;
+                }
             }
         }
 
@@ -529,6 +810,15 @@
             font-size: 30px;
             font-weight: 700;
             margin-top: 90px;
+
+            @include tb {
+                font-size: 20px;
+                margin-top: 60px;
+            }
+
+            @include m {
+                font-size: 16px;
+            }
 
             &:hover {
                 svg {
@@ -552,6 +842,14 @@
                     margin-left: 20px;
                     transition: all .3s;
 
+                    @include tb {
+                        width: 30px;
+                    }
+
+                    @include m {
+                        width: 25px;
+                    }
+
                     .cls-1 {
                         stroke: #000;
                         stroke-miterlimit: 10;
@@ -571,9 +869,18 @@
         margin-top: 150px;
         border-top: 1px solid #bcbcbc;
 
+        @include m {
+            padding-top: 80px;
+            margin-top: 80px;
+        }
+
         .tab-menu {
             display: flex;
             align-items: flex-start;
+
+            @include m {
+                display: none;
+            }
         }
 
         .tab-item {
@@ -582,6 +889,10 @@
             text-align: left;
             transition: all .3s;
             cursor: pointer;
+
+            @include tb {
+                display: none;
+            }
 
             &:hover {
                 color: #000;
@@ -613,15 +924,72 @@
 
         .tab-img {
             margin-top: 50px;
+
+            .tab-item {
+                display: none;
+                width: 100%;
+                margin-bottom: 20px;
+
+                @include tb {
+                    display: block;
+                }
+
+                .number {
+                    color: #000;
+                    display: block;
+                    font-size: max(18px, 3vw);
+                    font-weight: 700;
+                }
+
+                .desc {
+                    color: #000;
+                    font-size: max(18px, 3vw);
+                    font-weight: 900;
+                    line-height: 1.3;
+                    margin-top: 0;
+                }
+            }
+
+            .pc {
+                display: block;
+
+                @include tb {
+                    display: none;
+                }
+            }
+
+            .mobile {
+                display: none;
+
+                @include tb {
+                    display: block;
+                }
+            }
         }
     }
 
     .sc-seller {
         margin-top: 200px;
 
+        @include tb {
+            margin-top: 160px;
+        }
+
+        @include m {
+            margin-top: 80px;
+        }
+
         .inner {
             display: flex;
             align-items: flex-start;
+
+            @include tb {
+                flex-wrap: wrap;
+            }
+
+            @include m {
+                padding-right: 0;
+            }
         }
 
         // sticky 적용 안되는 문제는 최상단에 "overflow : hidden"이 없어야 하고 align-items: flex-start; 써야함
@@ -631,12 +999,19 @@
             position: sticky;
             top: 0px;
             margin: 0px 60px 0px 0px;
-            // width: 547px;
             height: 100vh;
             flex: 1;
 
+            @include tb {
+                height: auto;
+            }
+
             .textbox {
                 .img-wrap {
+                    @include tb {
+                        display: none;
+                    }
+
                     img {
                         width: 85%;
                     }
@@ -649,6 +1024,10 @@
             flex: 1;
             margin-top: 120px;
             margin: 0 0px -80px;
+
+            @include tb {
+                display: none;
+            }
         }
 
         .content-list {
@@ -723,7 +1102,6 @@
                     }
 
                     .title {
-                        // width: 331px;
                         display: block;
                         overflow: hidden;
                         font-size: 22px;
@@ -814,10 +1192,165 @@
                 }
             }
         }
+
+        .mo-right {
+            display: none;
+
+            @include tb {
+                display: block;
+                width: 100%;
+                margin-top: 40px;
+            }
+
+            @include m {
+                margin-top: 20px;
+            }
+
+            .item {
+                width: 100%;
+                margin-bottom: 0;
+
+                .txt {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                    margin-bottom: 5px;
+                    font-size: 14px;
+                    color: #999;
+                    transition: all .3s;
+
+                    @include tb {
+                        font-size: 12px;
+                    }
+
+                    @include m {
+                        font-size: 11px;
+                        font-weight: 600;
+                    }
+
+                    strong {
+                        margin-left: 5px;
+                        font-weight: 600;
+                    }
+                }
+
+                &:hover img {
+                    transform: scale(1.1);
+                }
+
+                .img-box {
+                    display: block;
+                    overflow: hidden;
+
+                    img {
+                        width: 100%;
+                        transition: all .3s;
+                    }
+                }
+
+                .text-box {
+
+                    .type {
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin-top: 30px;
+                        margin-bottom: 15px;
+                        color: #999;
+
+                        @include m {
+                            margin-top: 15px;
+                            margin-bottom: 6px;
+                        }
+
+                        span {
+                            display: inline-flex;
+                            align-items: center;
+                            font-size: 14px;
+                            font-weight: 600;
+                            line-height: 1;
+                            transition: all .3s;
+
+                            @include tb {
+                                font-size: 12px;
+                            }
+
+                            @include m {
+                                font-size: 10px;
+                            }
+
+                            &:last-child::before {
+                                content: "";
+                                display: inline-block;
+                                width: 4px;
+                                height: 4px;
+                                margin: 0 8px;
+                                background-color: #B3B3B3;
+                                border-radius: 50%;
+                                vertical-align: middle;
+                            }
+                        }
+
+                    }
+
+                    .tit {
+                        display: block;
+                        overflow: hidden;
+                        font-size: 22px;
+                        font-weight: 800;
+                        word-break: break-all;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        text-decoration-line: underline;
+                        text-decoration-style: solid;
+                        text-underline-position: under;
+                        text-underline-offset: 2px;
+                        line-height: 1.6;
+
+                        @include tb {
+                            font-size: 16px;
+                        }
+
+                        @include m {
+                            font-size: 13px;
+                            text-decoration: none;
+                        }
+                    }
+
+                    .price-txt {
+                        display: flex;
+                        align-items: center;
+                        margin-top: 25px;
+                        font-size: 26px;
+                        font-weight: 700;
+                        line-height: 1;
+
+                        @include tb {
+                            margin-top: 15px;
+                            font-size: 20px;
+                        }
+
+                        @include m {
+                            margin-top: 10px;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .sc-behind {
         margin-top: 280px;
+
+        @include tb {
+            margin-top: 160px;
+        }
+
+        @include m {
+            padding-top: 80px;
+            margin-top: 80px;
+            border-top: 1px solid #eee;
+        }
 
         .text-area {
             text-align: center;
@@ -827,6 +1360,10 @@
                 font-weight: 800;
                 text-align: center;
                 line-height: 1.3;
+
+                @include m {
+                    font-size: calc(28px*0.8);
+                }
             }
 
             .move-text {
@@ -836,6 +1373,17 @@
                 width: 500px;
                 height: 87px;
                 margin: -15px auto 0;
+
+                @include tb {
+                    transform: rotate(-10deg);
+                    width: 450px;
+                    height: 78px;
+                }
+
+                @include m {
+                    max-width: 100%;
+                    margin-top: 0;
+                }
 
                 .move-textbox {
                     position: absolute;
@@ -853,6 +1401,10 @@
                         font-weight: 700;
                         white-space: nowrap;
                         transition: 0.3s;
+
+                        @include m {
+                            font-size: 13px;
+                        }
 
                         @keyframes textLoop {
                             from {
@@ -880,6 +1432,17 @@
             margin-top: 120px;
             min-height: 300px;
 
+            @include tb {
+                margin-top: 80px;
+                display: flex;
+                flex-direction: column-reverse;
+                border-top: 1px solid #eee;
+            }
+
+            @include m {
+                margin-top: 35px;
+            }
+
             .title-wrap {
                 display: flex;
                 align-items: baseline;
@@ -888,22 +1451,69 @@
                 border-bottom: 1px solid #bcbcbc;
                 transition: all .3s;
 
+                @include tb {
+                    display: block;
+                }
+
+                @include m {
+                    padding: 5px 0 20px;
+                    border-top: 1px solid #eee;
+                    border-bottom: 1px solid #eee;
+                }
+
                 strong {
                     width: 65px;
-                    margin-right: 40px;
+                    margin-right: 60px;
                     color: #e74e1d;
                     font-size: 18px;
                     font-weight: 600;
+
+                    @include pc-md {
+                        margin-right: 40px;
+                    }
+
+                    @include tb {
+                        margin-top: 1em;
+                        font-size: 14px;
+                    }
+
+                    @include m {
+                        font-size: 12px;
+                    }
                 }
             }
 
             .content {
                 width: 60%;
 
+                @include pc-md {
+                    width: 65%;
+                }
+
+                @include tb {
+                    width: 80%;
+                }
+
+                @include m {
+                    width: 100%;
+                }
+
                 .link {
                     font-size: 23px;
                     font-weight: 800;
                     transition: all .3s;
+
+                    @include pc-md {
+                        font-size: 21px;
+                    }
+
+                    @include tb {
+                        font-size: 18px;
+                    }
+
+                    @include m {
+                        font-size: 16px;
+                    }
                 }
 
                 .tag-list {
@@ -930,6 +1540,13 @@
                         transition: background 0.75s,
                             color 0.75s;
 
+                        @include tb {
+                            padding: 3px 6px;
+                            margin-bottom: 6px;
+                            margin-left: 6px;
+                            font-size: 11px;
+                        }
+
                         &:hover {
                             background: #000;
                             color: #fff;
@@ -952,8 +1569,13 @@
                 height: auto;
                 padding-top: 23%;
 
-                .img-wrap {
+                @include tb {
+                    position: relative;
+                    width: 100%;
+                    padding-top: 20px;
+                }
 
+                .img-wrap {
                     position: absolute;
                     top: 0;
                     right: 0;
@@ -963,11 +1585,30 @@
                     height: 100%;
                     transition: all .3s;
 
+                    @include tb {
+                        display: block;
+                        position: relative;
+                        width: 100%;
+                        height: 0;
+                        padding-top: 75%;
+                        background: #f4f4f4;
+                        transform: rotate(0deg);
+                    }
+
                     img {
                         position: absolute;
                         height: 100%;
                         object-fit: cover;
                         object-position: center;
+
+                        @include tb {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            width: 100%;
+                            object-fit: cover;
+                        }
                     }
                 }
             }
@@ -980,7 +1621,24 @@
         margin-top: 150px;
         margin-bottom: 150px;
 
+        @include tb {
+            margin-top: 100px;
+            margin-bottom: 100px;
+        }
+
+        @include m {
+            margin: 80px 0;
+        }
+
         .inner {
+            @include tb {
+                padding: 0 max(2.5vw, 15px);
+            }
+
+            @include m {
+                padding: 0;
+            }
+
             a {
                 display: block;
                 position: relative;
@@ -991,6 +1649,10 @@
                 position: relative;
                 width: 100%;
                 padding-top: 30%;
+
+                @include m {
+                    padding-top: max(50%, 200px);
+                }
 
                 &::before {
                     content: "";
@@ -1027,10 +1689,23 @@
                 z-index: 1;
                 color: #fff;
 
+                @include m {
+                    left: 20px;
+                    right: unset;
+                }
+
                 .desc {
                     margin-bottom: 10px;
                     font-size: 23px;
                     font-weight: 700;
+
+                    @include pc {
+                        font-size: 21px;
+                    }
+
+                    @include tb {
+                        font-size: 14px;
+                    }
                 }
 
                 .title {
@@ -1038,6 +1713,10 @@
                     font-size: 52px;
                     font-weight: 900;
                     line-height: 1.1;
+
+                    @include m {
+                        font-size: 28px;
+                    }
                 }
             }
         }
@@ -1050,12 +1729,15 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 99999;
+    z-index: -1;
     background: rgba(0, 0, 0, .65);
+    opacity: 0;
+    visibility: hidden;
 
     &.on {
-        opacity: 0;
-        visibility: hidden;
+        z-index: 99999;
+        opacity: 1;
+        visibility: visible;
     }
 
     .content {
@@ -1170,25 +1852,297 @@
     }
 }
 
+.sc-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    width: 100%;
+    height: 100%;
+    padding: 150px 0 80px;
+    background: rgba(0, 0, 0, 0.7);
+    transition: 0.2s ease-in-out;
+
+    &.none {
+        opacity: 0;
+        visibility: hidden;
+        z-index: -100;
+    }
+
+    .group-login {
+        position: relative;
+        width: 400px;
+        max-width: 100%;
+        padding: 40px;
+        margin: 0 auto;
+        background-color: #fff;
+
+        .tit-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 35px;
+
+            .title {
+                font-size: 24px;
+                font-weight: 800;
+            }
+
+            button {
+                svg {
+                    width: 22px;
+                    height: 22px;
+                }
+            }
+        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            button {
+                display: block;
+                position: relative;
+                width: 100%;
+                height: 50px;
+                color: #fff;
+                font-size: 15px;
+                font-weight: 600;
+                line-height: 48px;
+                text-align: center;
+                transition: all .3s;
+
+                &.naver {
+                    background-color: #2DB400;
+                }
+
+                &.kakao {
+                    background-color: #FAE100;
+                    color: #000;
+                }
+
+                &.google {
+                    background-color: #fff;
+                    border: 2px solid #eee;
+                    color: #000;
+                }
+
+                &.black {
+                    background: #000;
+                }
+
+                img {
+                    width: 18px;
+                    position: absolute;
+                    top: 50%;
+                    left: 20px;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+
+        .text-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+
+            a {
+                position: relative;
+                color: #999;
+                font-size: 13px;
+                font-weight: 600;
+                transition: all .3s;
+            }
+
+            .find {
+                margin-left: 17px;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: -8px;
+                    transform: translateY(-50%);
+                    width: 1px;
+                    height: 10px;
+                    background-color: #bcbcbc;
+                }
+            }
+        }
+    }
+}
+
+.sc-signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    opacity: 1;
+    visibility: visible;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: all .3s;
+
+    &.none {
+        z-index: -100;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .group-signup {
+        position: relative;
+        width: 400px;
+        max-width: 100%;
+        padding: 40px 40px 110px;
+        margin: 0 auto;
+        background-color: #fff;
+        z-index: 9999;
+
+        .tit-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 35px;
+
+            .title {
+                font-size: 24px;
+                font-weight: 800;
+            }
+
+            button {
+                svg {
+                    width: 22px;
+                    height: 22px;
+                }
+            }
+        }
+
+        .desc {
+            margin-bottom: 20px;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .check-box {
+            .txt {
+                display: flex;
+                justify-content: space-between;
+
+                .em {
+                    font-size: 14px;
+                    font-weight: 500;
+
+                    &::after {
+                        content: "*";
+                        margin-left: 3px;
+                        color: #e74e1d;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                }
+
+                a {
+                    border-bottom: 1px solid #c4c4c4;
+                    color: #C4C4C4;
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+            }
+
+            .check {
+                label {
+                    display: block;
+                    height: 50px;
+                    margin-top: 8px;
+                    border: 2px solid #000;
+                    font-weight: 600;
+                    line-height: 48px;
+                    text-align: center;
+                    cursor: pointer;
+                }
+            }
+
+            &+.check-box {
+                margin-top: 15px;
+            }
+        }
+
+        .age-check {
+            margin-top: 10px;
+            color: #666;
+            font-size: 13px;
+            font-weight: 500;
+
+            input {
+                &:checked+label svg {
+                    fill: #000 !important;
+                }
+            }
+
+            label {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+
+                svg {
+                    fill: #bcbcbc;
+                    margin-right: 3px;
+                }
+            }
+        }
+
+        .next {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #000;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 58px;
+            text-align: center;
+            cursor: pointer;
+        }
+    }
+}
+
 .search-modal {
     display: flex;
     justify-content: center;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: -100;
     opacity: 0;
+    visibility: hidden;
     width: 100%;
     height: 100%;
     padding-top: 200px;
     background-color: rgba(0, 0, 0, 0.9);
-    pointer-events: none;
     transition: all .3s;
-    z-index: 100;
 
     &.on {
         opacity: 1;
-        pointer-events: auto;
+        visibility: visible;
+        z-index: 9999;
     }
 
     .btn-close {

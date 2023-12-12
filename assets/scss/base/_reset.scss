@@ -74,4 +74,10 @@ body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     transition: .3s;
+
+    &.noscroll {
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
 }

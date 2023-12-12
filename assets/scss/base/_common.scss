@@ -21,4 +21,8 @@
     max-width: 1640px;
     margin: 0 auto;
     transition: all 0.2s;
+
+    @include tb {
+        padding: 0 max(2.5vw, 15px);
+    }
 }

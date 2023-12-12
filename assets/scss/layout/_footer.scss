@@ -5,11 +5,16 @@
     background-color: #fff;
     border-top: 1px solid #bcbcbc;
 
+    @include tb {
+        padding: 20px 0 60px;
+        border-top: 1px solid #eee;
+    }
+
     .sc-top {
         position: fixed;
         bottom: 20px;
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         right: 20px;
         background-color: #e74e1d;
         border-radius: 50%;
@@ -17,6 +22,18 @@
         transition: background 0.2s ease-in-out,
             opacity .5s,
             bottom 0.5s;
+
+        @include pc {
+            width: 50px;
+            height: 50px;
+        }
+
+        @include tb {
+            bottom: 25px;
+            right: max(2.5vw, 15px);
+            width: 35px;
+            height: 35px;
+        }
 
         &:hover {
             background-color: #000;
@@ -43,29 +60,97 @@
 
             svg {
                 width: 15px;
+
+                @include tb {
+                    width: 12px;
+                }
             }
         }
     }
 
     .footer-wrap {
         display: grid;
-        grid-template-columns: 1fr;
-        align-items: stretch;
+        grid-template-columns: auto 1fr;
         gap: 0 200px;
+        align-items: flex-start;
+
+        @include pc {
+            grid-template-columns: 1fr;
+            align-items: stretch;
+        }
+
+        @include m {
+            padding-right: 0;
+        }
+    }
+
+    .center-box {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0 80px;
+
+        @include pc {
+            order: 2;
+        }
     }
 
     .group-list {
-        display: flex;
-        margin-bottom: 45px;
+        &.pc {
+            display: flex;
+            flex-direction: column;
+
+            @include pc {
+                display: none;
+            }
+
+            li {
+                font-size: 18px;
+
+                &+li {
+                    margin-top: 9px;
+                }
+            }
+        }
+
+        &.mobile {
+            display: none;
+
+            @include pc {
+                display: flex;
+                margin-bottom: 45px;
+            }
+
+            @include tb {
+                overflow: hidden;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
 
         li {
+            @include pc {
+                font-weight: 500;
+            }
+
+            @include m {
+                white-space: nowrap;
+            }
+
             &+li {
-                margin-left: 20px;
+                @include pc {
+                    margin-left: 20px;
+                }
+
+                @include m {
+                    margin-left: 15px;
+                }
             }
         }
 
         a {
-            font-weight: 500;
+            @include m {
+                font-size: 13px;
+            }
 
             &.strong {
                 font-weight: 700;
@@ -112,13 +197,21 @@
     }
 
     .link {
-        margin-top: 15px;
+        margin-top: 45px;
+
+        @include pc {
+            margin-top: 15px;
+        }
 
         &>a {
             display: inline-block;
             position: relative;
             font-size: 17px;
             font-weight: 700;
+
+            @include m {
+                font-size: 14px;
+            }
 
             &::after {
                 content: "";
@@ -149,6 +242,12 @@
         justify-content: start;
         align-items: center;
         margin-top: 30px;
+
+        @include pc {
+            order: 1;
+            padding-left: 0;
+            margin: 30px 0 0;
+        }
 
         li {
             display: block;
@@ -193,15 +292,33 @@
             color: #fff;
             border-color: #000;
         }
+
+        @include m {
+            padding: 2px 6px 1px;
+            font-size: 10px;
+        }
     }
 
     .addr-area {
-        margin-top: 30px;
         font-size: 14px;
         font-weight: 500;
 
+        @include pc {
+            margin-top: 30px;
+        }
+
+        @include m {
+            font-size: 12px;
+        }
+
         p+p {
             margin-top: 3px;
+        }
+
+        span {
+            @include m {
+                display: block;
+            }
         }
 
         .line {
@@ -211,6 +328,10 @@
             height: 11px;
             margin: 0 10px;
             background-color: #000;
+
+            @include m {
+                display: none;
+            }
         }
     }
 
@@ -223,11 +344,21 @@
         p {
             margin-top: 5px;
         }
+
+        br {
+            @include m {
+                display: none;
+            }
+        }
     }
 
     .copy-light {
         margin-top: 37px;
         font-size: 14px;
         font-weight: 500;
+
+        @include m {
+            font-size: 11px;
+        }
     }
 }
