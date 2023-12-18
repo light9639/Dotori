@@ -248,15 +248,9 @@ document.querySelector('.header .select-box').addEventListener('click', function
  * 헤더 메뉴 호버시 서브메뉴
  */
 function headerMenu() {
-    let mobileCheck = true;
-    if (window.innerWidth < 1200) {
-        mobileCheck = true;
-    } else {
-        mobileCheck = false;
-    }
     let mMenu = document.querySelectorAll('.gnb-list > li');
 
-    if (window.innerWidth < 1200 && mobileCheck == true) {
+    if (window.innerWidth < 1200) {
         mMenu.forEach(function (el) {
             el.addEventListener('click', function () {
                 for (let i = 0; i < mMenu.length; i++) {
@@ -271,7 +265,7 @@ function headerMenu() {
                 }
             })
         })
-    } else if (window.innerWidth >= 1200 && mobileCheck == false) {
+    } else if (window.innerWidth >= 1200) {
         mMenu.forEach(function (el) {
             el.addEventListener('mouseover', function () {
                 this.classList.add('on')
@@ -372,7 +366,7 @@ function ImgMoveJS() {
             document.querySelector('.sc-behind .img-wrap').style.transform = `rotate(${-num}deg)`
         })
     } else {
-        return
+        document.querySelector('.sc-behind .img-wrap').style.transform = "rotate(0deg)"
     }
 }
 
