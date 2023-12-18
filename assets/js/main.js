@@ -120,7 +120,6 @@ tabSwiper = new Swiper(".sc-tab .swiper", {
     },
 })
 let tabList = [tab1, tab2, tab3];
-console.log(tabList);
 tabList.forEach(function (a, i) {
     a.addEventListener('click', function () {
         tabSwiper.slideTo(i, 1000, false);
@@ -177,16 +176,14 @@ function tabJS() {
  */
 sellerSwiper = new Swiper(".sc-item .swiper", {
     speed: 500,
-    // loop: true,
     slidesPerView: 2.25,
     spaceBetween: 15,
     breakpoints: {
         767: {
-            slidesPerView: 3,
             spaceBetween: 20,
         },
         1024: {
-            slidesPerView: 2.75,
+            slidesPerView: 3,
             spaceBetween: 60,
         },
     }
@@ -197,7 +194,6 @@ sellerSwiper = new Swiper(".sc-item .swiper", {
  */
 sellerSwiper = new Swiper(".sc-seller .mo-right .swiper", {
     speed: 500,
-    // loop: true,
     slidesPerView: 2.25,
     spaceBetween: 15,
     breakpoints: {
@@ -252,28 +248,40 @@ document.querySelector('.header .select-box').addEventListener('click', function
  * 헤더 메뉴 호버시 서브메뉴
  */
 function headerMenu() {
-    let headMenu = document.querySelector('.header .gnb > .gnb-list > li');
+    let mobileCheck = true;
+    if (window.innerWidth < 1200) {
+        mobileCheck = true;
+    } else {
+        mobileCheck = false;
+    }
     let mMenu = document.querySelectorAll('.gnb-list > li');
 
-    if (window.innerWidth >= 1200) {
-        headMenu.addEventListener('mouseover', function () {
-            this.classList.add('on')
-        })
-        headMenu.addEventListener('mouseleave', function () {
-            this.classList.remove('on')
-        })
-    } else if (window.innerWidth < 1200) {
-        headMenu.classList.remove('on')
+    if (window.innerWidth < 1200 && mobileCheck == true) {
         mMenu.forEach(function (el) {
             el.addEventListener('click', function () {
                 for (let i = 0; i < mMenu.length; i++) {
                     if (mMenu[i] != this) {
-                        mMenu[i].classList.remove('active')
+                        mMenu[i].classList.remove('on')
                     }
                 }
-                this.classList.toggle('active')
+                if (this.classList.contains('on')) {
+                    this.classList.remove('on')
+                } else {
+                    this.classList.add('on')
+                }
             })
         })
+    } else if (window.innerWidth >= 1200 && mobileCheck == false) {
+        mMenu.forEach(function (el) {
+            el.addEventListener('mouseover', function () {
+                this.classList.add('on')
+            })
+            el.addEventListener('mouseleave', function () {
+                this.classList.remove('on')
+            })
+        })
+    } else {
+        return
     }
 }
 
